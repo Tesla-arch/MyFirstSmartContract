@@ -18,6 +18,13 @@ step 6
 From the Deploy tab, I specifies the Remix VM(cacum) as my environment from which I proceed to deploy the contract
 
 
+
+
+
+
+
+
+
 WEEK 2
 Data types, Functions, Conditionals, Visibility, Arrays, Structs, and Enums
 
