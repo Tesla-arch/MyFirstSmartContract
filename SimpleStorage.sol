@@ -24,6 +24,7 @@ contract SimpleStorage {
 
     function storeNumber(uint256 _favoriteNumber) public {
         favoriteNumber = _favoriteNumber;
+        emit NumberUpdated(_favoriteNumber, msg.sender);
     }
 
     function getFavoriteNumber() public view returns (uint256) {
@@ -72,6 +73,7 @@ contract SimpleStorage {
 
     function addPerson(string memory _name, uint256 _favoriteNumber) public {
         people.push(Person(_name, _favoriteNumber));
+        nameToFavoriteNumber[_name] = favoriteNumber;
     }
 
     function activateContract() public {
@@ -84,5 +86,34 @@ contract SimpleStorage {
 
     function isActive() public view returns (bool) {
         return state == ContractState.Active;
+    }
+
+    mapping(string => uint256) public nameToFavoriteNumber;
+
+    event NumberUpdated(uint256 newNumber, address updatedBy);
+
+    // Function to store a number in the storage variable
+    function store(uint256 _favoriteNumber) public {
+        favoriteNumber = _favoriteNumber;
+    }
+
+    // Function that uses a memory variable
+    function updateNumber(uint256 _newNumber) public pure returns (uint256) {
+        // Memory variable is used for temporary calculations
+        uint256 tempNumber = _newNumber + 5;
+        return tempNumber;
+    }
+
+    // Function that uses a calldata variable
+    function concatenateString(string calldata _inputString)
+        public
+        pure
+        returns (string memory)
+    {
+        // Memory variable to store the concatenated result
+        string memory newString = string(
+            abi.encodePacked(_inputString, " is awesome!")
+        );
+        return newString;
     }
 }
